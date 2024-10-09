@@ -11,8 +11,11 @@ namespace UI
     {
         #region Serialize Parameter
 
+        [Header("Interact Button")]
         [SerializeField] private GameObject buttonPrompt;
         [SerializeField] private Transform rootLocation;
+        
+        
         
         #endregion
 

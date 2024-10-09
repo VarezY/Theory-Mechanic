@@ -18,7 +18,7 @@ namespace Item
         [Separator]
         [ConditionalField(nameof(categorize), false, ItemCategorize.Interact2), SerializeField] public string interactName2;
         [ConditionalField(nameof(categorize), false, ItemCategorize.Interact2), SerializeField] public UnityEvent interact2;
-        
+
         #endregion
 
         #region Private Parameter

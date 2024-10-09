@@ -92,6 +92,7 @@ namespace UI
                         break;
                     case ItemCategorize.World:
                         break;
+                    case ItemCategorize.None:
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

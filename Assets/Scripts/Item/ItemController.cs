@@ -65,11 +65,15 @@ namespace Item
             {
                 _isHoldingItem = true;
                 _gameManager.UIController.SelectedButton.GetComponentInChildren<TMP_Text>().text = "Place Item";
+                interactName1 = "Place Item";
+                interactName2 = "Place Item";
             }
             else
             {
                 _isHoldingItem = false;
                 _gameManager.UIController.SelectedButton.GetComponentInChildren<TMP_Text>().text = "Hold Item";
+                interactName1 = "Hold Item";
+                interactName2 = "Hold Item";
             }
         }
 

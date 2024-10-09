@@ -87,11 +87,10 @@ namespace Player
 
         private void OnInteract()
         {
-            if (GameManager.Instance.UIController.SelectedButton)
-            {
-                _manager.UIController.SelectedButton.onClick.Invoke();
-                _manager.AudioController.PlayAudioInteract();
-            }
+            if (!GameManager.Instance.UIController.SelectedButton)
+                return;
+            _manager.UIController.SelectedButton.onClick.Invoke();
+            _manager.AudioController.PlayAudioInteract();
         }
         
         private void OnSelectInteract(InputValue scrollValue)

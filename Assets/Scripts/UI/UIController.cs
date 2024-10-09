@@ -14,8 +14,14 @@ namespace UI
         [Header("Interact Button")]
         [SerializeField] private GameObject buttonPrompt;
         [SerializeField] private Transform rootLocation;
+
+        [Header("Slider Status")]
+        [SerializeField] private Slider healthSlider;
+        [SerializeField] private Slider staminaSlider;
+        [SerializeField] private Slider boredomSlider;
         
-        
+        [Header("Clock")]
+        [SerializeField] private TMP_Text clockText;
         
         #endregion
 
@@ -34,6 +40,16 @@ namespace UI
 
         private void Start()
         {
+            GameManager.Instance.GameEvents.onUpdateTimeUI += GameEventsOnUpdateTimeUI;
+        }
+
+        private void OnEnable()
+        {
+        }
+        
+        private void OnDisable()
+        {
+            GameManager.Instance.GameEvents.onUpdateTimeUI -= GameEventsOnUpdateTimeUI;
         }
 
         private void Update()
@@ -86,7 +102,6 @@ namespace UI
                 SelectedButton.GetComponent<TextPrompt>().SelectIcon(true);
                 _indexButton = 0;
             }
-            
         }
 
         public void SelectButtonPrompt(int index)
@@ -94,8 +109,6 @@ namespace UI
             Button[] buttonList = rootLocation.GetComponentsInChildren<Button>();
             if (buttonList.IsNullOrEmpty())
                 return;
-            
-
             
             SelectedButton.GetComponent<TextPrompt>().SelectIcon(false);
             switch (index)
@@ -115,6 +128,7 @@ namespace UI
                 default:
                     return;
             }
+            
             SelectedButton.GetComponent<TextPrompt>().SelectIcon(true);
         }
 
@@ -129,10 +143,40 @@ namespace UI
         #endregion
         
         #region Private Methods
-
-        private void CheckOutOfBounds()
+        
+        private void GameEventsOnUpdateTimeUI(float time, bool type)
         {
+            time = Mathf.Repeat(time, 24f);
             
+            int hours = Mathf.FloorToInt(time);
+            int minutes = Mathf.RoundToInt((time - hours) * 60);
+
+            if (minutes == 60)
+            {
+                hours = (hours + 1) % 24;
+                minutes = 0;
+            }
+            
+            string result;
+            switch (type)
+            {
+                case true:
+                    result = $"{hours:D2}:{minutes:D2}";
+                    break;
+                case false:
+                    string time12 = hours switch
+                    {
+                        0 => $"12:{minutes:D2} AM",
+                        < 12 => $"{hours}:{minutes:D2} AM",
+                        12 => $"12:{minutes:D2} PM",
+                        _ => $"{hours - 12}:{minutes:D2} PM"
+                    };
+                    
+                    result = time12;
+                    break;
+            }
+
+            clockText.text = result;
         }
 
         #endregion

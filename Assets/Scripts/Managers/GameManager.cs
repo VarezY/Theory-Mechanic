@@ -1,5 +1,6 @@
 using System;
 using Audio;
+using Player;
 using UI;
 using UnityEngine;
 namespace Managers
@@ -8,7 +9,7 @@ namespace Managers
     {
         public static GameManager Instance { get; private set; }
 
-        // public PlayerController PlayerController;
+        public PlayerManager PlayerManager { get; private set; } 
         
         public UIController UIController { get; private set; }
         public AudioController AudioController { get; private set; }
@@ -29,6 +30,7 @@ namespace Managers
             UIController = GetComponentInChildren<UIController>();
             AudioController = GetComponentInChildren<AudioController>();
 
+            PlayerManager = FindObjectOfType<PlayerManager>();
         }
 
         public void TestDebug(string message)

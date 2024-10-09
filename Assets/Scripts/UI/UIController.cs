@@ -41,6 +41,9 @@ namespace UI
         private void Start()
         {
             GameManager.Instance.GameEvents.onUpdateTimeUI += GameEventsOnUpdateTimeUI;
+            GameManager.Instance.GameEvents.onHealthUpdate += GameEventOnHealthUpdate;
+            GameManager.Instance.GameEvents.onStaminaUpdate += GameEventOnStaminaUpdate;
+            GameManager.Instance.GameEvents.onBoredomUpdate += GameEventOnBoredomUpdate;
         }
 
         private void OnEnable()
@@ -50,6 +53,9 @@ namespace UI
         private void OnDisable()
         {
             GameManager.Instance.GameEvents.onUpdateTimeUI -= GameEventsOnUpdateTimeUI;
+            GameManager.Instance.GameEvents.onHealthUpdate -= GameEventOnHealthUpdate;
+            GameManager.Instance.GameEvents.onStaminaUpdate -= GameEventOnStaminaUpdate;
+            GameManager.Instance.GameEvents.onBoredomUpdate -= GameEventOnBoredomUpdate;
         }
 
         private void Update()
@@ -178,6 +184,24 @@ namespace UI
             }
 
             clockText.text = result;
+        }
+
+        private void GameEventOnHealthUpdate(float maxHealth)
+        {
+            float percentage = GameManager.Instance.PlayerManager.CurrentHealth / maxHealth;
+            healthSlider.value = percentage;
+        }
+        
+        private void GameEventOnStaminaUpdate(float maxStamina)
+        {
+            float percentage = GameManager.Instance.PlayerManager.CurrentStamina / maxStamina;
+            staminaSlider.value = percentage;
+        }
+
+        private void GameEventOnBoredomUpdate(float maxBoredom)
+        {
+            float percentage = GameManager.Instance.PlayerManager.CurrentBoredom / maxBoredom;
+            boredomSlider.value = percentage;
         }
 
         #endregion

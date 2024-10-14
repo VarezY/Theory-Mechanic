@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Objectives;
 using UnityEngine;
 namespace Managers
 {
@@ -12,6 +14,8 @@ namespace Managers
         {
             onUpdateTimeUI?.Invoke(time, hours24);
         }
+
+        #region Player Status
 
         public event Action<float> onHealthUpdate;
         public virtual void HealthUpdate(float maxHealth)
@@ -48,5 +52,33 @@ namespace Managers
         {
             onBoredomAdd?.Invoke(value);
         }
+
+        #endregion
+
+        public event Action<Quest> onAddQuest;
+        public virtual void AddQuest(Quest quest)
+        {
+            onAddQuest?.Invoke(quest);
+        }
+        
+        public event Action<Quest, List<Quest>> onUpdateQuest;
+        public virtual void UpdateQuest(Quest mainQuest, List<Quest> sideQuests)
+        {
+            onUpdateQuest?.Invoke(mainQuest, sideQuests);
+        }        
+        
+        public event Action<Objective[], bool> onAddObjective;
+        public virtual void AddObjective(Objective[] objective, bool isMainQuest)
+        {
+            onAddObjective?.Invoke(objective, isMainQuest);
+        }
+        
+        public event Action<Objective, int> onUpdateObjective;
+        public virtual void UpdateObjective(Objective objective, int value)
+        {
+            onUpdateObjective?.Invoke(objective, value);
+        }
+
+        
     }
 }

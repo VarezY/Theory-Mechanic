@@ -40,6 +40,9 @@ namespace UI
 
         private void Start()
         {
+            
+            
+            // UI
             GameManager.Instance.GameEvents.onUpdateTimeUI += GameEventsOnUpdateTimeUI;
             GameManager.Instance.GameEvents.onHealthUpdate += GameEventOnHealthUpdate;
             GameManager.Instance.GameEvents.onStaminaUpdate += GameEventOnStaminaUpdate;
@@ -52,6 +55,9 @@ namespace UI
         
         private void OnDisable()
         {
+            
+            
+            // UI
             GameManager.Instance.GameEvents.onUpdateTimeUI -= GameEventsOnUpdateTimeUI;
             GameManager.Instance.GameEvents.onHealthUpdate -= GameEventOnHealthUpdate;
             GameManager.Instance.GameEvents.onStaminaUpdate -= GameEventOnStaminaUpdate;
@@ -73,36 +79,24 @@ namespace UI
 
         public void GenerateButtonPrompt(ItemController targetItem)
         {
-            foreach (ItemCategorize categorized in Enum.GetValues(typeof(ItemCategorize)))
+            if (targetItem.eventsList.IsNullOrEmpty()) return;
+
+            var i = 1;
+            foreach (var interactEvent in targetItem.eventsList)
             {
-                if (categorized == ItemCategorize.None || !targetItem.categorize.HasFlag(categorized))
-                    continue;
-                
                 var tempButton = Instantiate(buttonPrompt, rootLocation);
-                tempButton.name = categorized.ToString();
-                tempButton.GetComponentInChildren<TMP_Text>().text = categorized.ToString();
-
-                switch (categorized)
+                if (!interactEvent.interactName.IsNullOrEmpty())
                 {
-                    case ItemCategorize.Interact1:
-                        if (!string.IsNullOrEmpty(targetItem.interactName1))
-                            tempButton.GetComponentInChildren<TMP_Text>().text = targetItem.interactName1;
-                        
-                        tempButton.GetComponent<Button>().onClick.AddListener(() => targetItem.interact1.Invoke());
-                        break;
-                    case ItemCategorize.Interact2:
-                        if (!string.IsNullOrEmpty(targetItem.interactName2))
-                            tempButton.GetComponentInChildren<TMP_Text>().text = targetItem.interactName2;
-
-                        tempButton.GetComponent<Button>().onClick.AddListener(() => targetItem.interact2.Invoke());
-                        break;
-                    case ItemCategorize.World:
-                        break;
-                    case ItemCategorize.None:
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    tempButton.name = interactEvent.interactName;
+                    tempButton.GetComponentInChildren<TMP_Text>().text = interactEvent.interactName;
                 }
-
+                else
+                {
+                    tempButton.name = $"Interact Button";
+                    tempButton.GetComponentInChildren<TMP_Text>().text = $"Interact {++i}";
+                }
+                tempButton.GetComponent<Button>().onClick.AddListener(() => interactEvent.onInteract.Invoke());
+               
                 if (SelectedButton)
                     continue;
                 SelectedButton = tempButton.GetComponent<Button>();
@@ -113,7 +107,7 @@ namespace UI
 
         public void SelectButtonPrompt(int index)
         {
-            Button[] buttonList = rootLocation.GetComponentsInChildren<Button>();
+            var buttonList = rootLocation.GetComponentsInChildren<Button>();
             if (buttonList.IsNullOrEmpty())
                 return;
             

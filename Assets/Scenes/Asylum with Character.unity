@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.015
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.9528302, g: 0.92110556, b: 0.63372195, a: 1}
+  m_AmbientSkyColor: {r: 0.80770445, g: 0.79435414, b: 0.6161868, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0.4
@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.179
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2829,39 +2830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce77c7f5b089f16448a5bef9022c51c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categorize: 1
-  interactName1: 
-  interact1:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 332055848}
-        m_TargetAssemblyTypeName: Managers.GameManager, Assembly-CSharp
-        m_MethodName: TestDebug
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Second Item Interact 1
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1478576967}
-        m_TargetAssemblyTypeName: Skyboxes.LightingManager, Assembly-CSharp
-        m_MethodName: AddTime
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 25
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  interactName2: 
-  interact2:
-    m_PersistentCalls:
-      m_Calls: []
+  eventsList: []
 --- !u!135 &619939453
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3852,39 +3821,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce77c7f5b089f16448a5bef9022c51c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categorize: 3
-  interactName1: 
-  interact1:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 332055848}
-        m_TargetAssemblyTypeName: Managers.GameManager, Assembly-CSharp
-        m_MethodName: TestDebug
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: First Item Interact 1
-          m_BoolArgument: 0
-        m_CallState: 2
-  interactName2: 
-  interact2:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 332055848}
-        m_TargetAssemblyTypeName: Managers.GameManager, Assembly-CSharp
-        m_MethodName: TestDebug
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: First Item Interact 2
-          m_BoolArgument: 0
-        m_CallState: 2
+  eventsList:
+  - interactName: Interact 1
+    onInteract:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 332055848}
+          m_TargetAssemblyTypeName: Managers.GameManager, Assembly-CSharp
+          m_MethodName: TestDebug
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Message 1
+            m_BoolArgument: 0
+          m_CallState: 2
+  - interactName: 
+    onInteract:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 332055848}
+          m_TargetAssemblyTypeName: Managers.GameManager, Assembly-CSharp
+          m_MethodName: TestDebug
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Message 2
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!135 &926508949
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5734,8 +5703,8 @@ MonoBehaviour:
   directionalLight: {fileID: 1945753298}
   preset: {fileID: 11400000, guid: 7a08fc752bf0b9841977f85c6bd2fd3e, type: 2}
   clockSetting: 0
-  timeRate: 1
-  timeOfDay: 0
+  timeRate: 0.01
+  timeOfDay: 14.2
   timeOfDay12: 0
 --- !u!114 &1502053359
 MonoBehaviour:
@@ -7235,39 +7204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce77c7f5b089f16448a5bef9022c51c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categorize: 2
-  interactName1: 
-  interact1:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 332055848}
-        m_TargetAssemblyTypeName: Managers.GameManager, Assembly-CSharp
-        m_MethodName: TestDebug
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Second Item Interact 1
-          m_BoolArgument: 0
-        m_CallState: 2
-  interactName2: Hold Item
-  interact2:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1912991839}
-        m_TargetAssemblyTypeName: Item.ItemController, Assembly-CSharp
-        m_MethodName: HoldItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  eventsList: []
 --- !u!135 &1912991840
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7578,7 +7515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1945753296}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.061628457, y: 0.70441604, z: 0.70441604, w: 0.061628457}
+  m_LocalRotation: {x: 0.07659401, y: 0.47534314, z: -0.87547296, w: 0.041587166}
   m_LocalPosition: {x: 895.0115, y: 1026.4353, z: 0.0020873323}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8722,12 +8659,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!114 &1010405454255436131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9177,12 +9114,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1 &3292311016497057563
 GameObject:
   m_ObjectHideFlags: 0
@@ -9811,12 +9748,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!4 &5833037785888368578
 Transform:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using Managers;
 using MyBox;
@@ -9,16 +10,17 @@ namespace Item
 {
     public class ItemController : MonoBehaviour
     {
+        [System.Serializable]
+        public class ItemEvents
+        {
+            public string interactName;
+            public UnityEvent onInteract;
+        }
+        
         #region Serialize Parameter
 
-        public ItemCategorize categorize;
-        [Separator]
-        [ConditionalField(nameof(categorize), false, ItemCategorize.Interact1), SerializeField] public string interactName1;
-        [ConditionalField(nameof(categorize), false, ItemCategorize.Interact1), SerializeField] public UnityEvent interact1;
-        [Separator]
-        [ConditionalField(nameof(categorize), false, ItemCategorize.Interact2), SerializeField] public string interactName2;
-        [ConditionalField(nameof(categorize), false, ItemCategorize.Interact2), SerializeField] public UnityEvent interact2;
-
+        public List<ItemEvents> eventsList;
+            
         #endregion
 
         #region Private Parameter
@@ -65,15 +67,15 @@ namespace Item
             {
                 _isHoldingItem = true;
                 _gameManager.UIController.SelectedButton.GetComponentInChildren<TMP_Text>().text = "Place Item";
-                interactName1 = "Place Item";
-                interactName2 = "Place Item";
+                // interactName1 = "Place Item";
+                // interactName2 = "Place Item";
             }
             else
             {
                 _isHoldingItem = false;
                 _gameManager.UIController.SelectedButton.GetComponentInChildren<TMP_Text>().text = "Hold Item";
-                interactName1 = "Hold Item";
-                interactName2 = "Hold Item";
+                // interactName1 = "Hold Item";
+                // interactName2 = "Hold Item";
             }
         }
 
@@ -84,7 +86,7 @@ namespace Item
         private void HoldingItem()
         {
             // Calculate position in front of camera
-            Vector3 hoverPosition = _camera.transform.position + _camera.transform.forward * _holdingDistance;
+            var hoverPosition = _camera.transform.position + _camera.transform.forward * _holdingDistance;
 
             // Move object to hover position
             transform.DOMove(hoverPosition, _animationDuration).SetEase(Ease.OutQuad);

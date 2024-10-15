@@ -1,6 +1,7 @@
 ﻿using Managers;
 using MyBox;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Objectives
 {
@@ -8,7 +9,12 @@ namespace Objectives
     {
         #region Serialize Parameter
         
-        [SerializeField] private Quest newQuest = null;
+        [DisplayInspector, SerializeField] private ObjectiveScriptable newObjective;
+        
+        [Space]
+        public UnityEvent OnBeforeTrigger;
+        public UnityEvent OnAfterTrigger;
+        public UnityEvent OnCompleteTrigger;
         
         #endregion
 
@@ -49,7 +55,19 @@ namespace Objectives
         [ButtonMethod]
         public void AddQuest()
         {
-            GameManager.Instance.GameEvents.AddQuest(newQuest);
+            newObjective.OnBeforeTrigger += () => OnBeforeTrigger.Invoke();
+            newObjective.OnAfterTrigger += () => OnAfterTrigger.Invoke();
+            newObjective.OnCompleteTrigger += () => OnCompleteTrigger.Invoke();
+
+            foreach (var objective in newObjective.objectives)
+            {
+                if (objective.currentValue >= objective.targetComplete)
+                    continue;
+                objective.isCompleted = false;
+                newObjective.isComplete = false;
+            }
+            
+            GameManager.Instance.GameEvents.AddQuest(newObjective);
         }
         
         #endregion

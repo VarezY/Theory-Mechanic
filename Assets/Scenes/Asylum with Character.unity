@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 0.179
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1123,6 +1122,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1291821140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &242398160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 242398161}
+  - component: {fileID: 242398162}
+  m_Layer: 0
+  m_Name: Update Objective
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &242398161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242398160}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 262.61456, y: 936.5767, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &242398162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242398160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04b490cea5c84068820c2a1d2f18ab92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetQuest: {fileID: 11400000, guid: 308d6e708cc12c344b8ff4ce7eb45a28, type: 2}
+  objectiveIndex: 0
+  objectiveValue: 1
 --- !u!1 &243237310
 GameObject:
   m_ObjectHideFlags: 0
@@ -3039,19 +3085,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5431dfa51e842b8b58afc08f1838603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newQuest:
-    questName: Quest Pertama
-    objectives:
-    - objectiveDisplayName: Start Running
-      targetComplete: 1
-      currentValue: 0
-      isCompleted: 0
-    - objectiveDisplayName: Kill Yourself 5 Time
-      targetComplete: 10
-      currentValue: 0
-      isCompleted: 0
-    questType: 0
-    isComplete: 0
+  newObjective: {fileID: 11400000, guid: 308d6e708cc12c344b8ff4ce7eb45a28, type: 2}
+  OnBeforeTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAfterTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCompleteTrigger:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &660334257
 GameObject:
   m_ObjectHideFlags: 0
@@ -3789,6 +3832,107 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &827470566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 827470568}
+  - component: {fileID: 827470569}
+  - component: {fileID: 827470567}
+  m_Layer: 0
+  m_Name: New Objective
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &827470567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827470566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5431dfa51e842b8b58afc08f1838603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newObjective: {fileID: 11400000, guid: 0a948c4ebf87f024881ecd6f6716bcf1, type: 2}
+  OnBeforeTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAfterTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCompleteTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &827470568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827470566}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 262.61456, y: 936.5767, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &827470569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827470566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5431dfa51e842b8b58afc08f1838603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newObjective: {fileID: 11400000, guid: 308d6e708cc12c344b8ff4ce7eb45a28, type: 2}
+  OnBeforeTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAfterTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCompleteTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 332055848}
+        m_TargetAssemblyTypeName: Managers.GameManager, Assembly-CSharp
+        m_MethodName: TestDebug
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Main Quest Completed
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &833210401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7686,11 +7830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5e53da0f3941a78a2bff286266c488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMainQuest:
-    questName: 
-    objectives: []
-    questType: 0
-    isComplete: 0
+  currentMainQuest: {fileID: 0}
   listSideQuest: []
 --- !u!114 &1898451137
 MonoBehaviour:
@@ -9201,12 +9341,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!114 &1010405454255436131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9656,12 +9796,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &3292311016497057563
 GameObject:
   m_ObjectHideFlags: 0
@@ -10413,12 +10553,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!4 &5833037785888368578
 Transform:
   m_ObjectHideFlags: 0
@@ -12803,3 +12943,5 @@ SceneRoots:
   - {fileID: 1517019523}
   - {fileID: 1672556535}
   - {fileID: 18728663}
+  - {fileID: 827470568}
+  - {fileID: 242398161}

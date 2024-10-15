@@ -11,11 +11,11 @@ namespace Objectives
     {
         #region Serialize Parameter
         
-        [Foldout("Current Main Quest"), ReadOnly]
-        public Quest currentMainQuest = null;
+        [Foldout("Current Main Quest"), DisplayInspector, ReadOnly]
+        public ObjectiveScriptable currentMainQuest = null;
         
-        [Foldout("Current Side Quest"), ReadOnly]
-        public List<Quest> listSideQuest;
+        [Foldout("Current Side Quest"), DisplayInspector, ReadOnly]
+        public List<ObjectiveScriptable> listSideQuest;
         
         #endregion
 
@@ -31,23 +31,8 @@ namespace Objectives
 
         private void Start()
         {
-            GameManager.Instance.GameEvents.onAddQuest += GameEventsOnonAddQuest;
-            
-            // THIS IS A MUST TO START A NEW QUEST
-            currentMainQuest.isComplete = true;
-            /*var obj1 = new Objective();
-            obj1.objectiveDisplayName = "Objective";
-            obj1.targetComplete = 1;
-            obj1.isCompleted = false;
-
-            currentMainQuest = new Quest();
-            currentMainQuest.questName = "Quest 1";
-            currentMainQuest.objectives = new[]
-            {
-                obj1
-            };
-
-            currentMainQuest.isComplete = true;*/
+            GameManager.Instance.GameEvents.onAddQuest += GameEventsOnAddQuest;
+            GameManager.Instance.GameEvents.onUpdateObjective += GameEventOnUpdateQuest;
         }
         private void OnEnable()
         {
@@ -55,7 +40,8 @@ namespace Objectives
         
         private void OnDisable()
         {
-            GameManager.Instance.GameEvents.onAddQuest -= GameEventsOnonAddQuest;
+            GameManager.Instance.GameEvents.onAddQuest -= GameEventsOnAddQuest;
+            GameManager.Instance.GameEvents.onUpdateObjective -= GameEventOnUpdateQuest;
         }
 
         private void Update()
@@ -74,13 +60,20 @@ namespace Objectives
         
         #region Private Methods
 
-        private void GameEventsOnonAddQuest(Quest quest)
+        private void GameEventsOnAddQuest(ObjectiveScriptable quest)
         {
             // Check if the quest is Main Quest or Side Quest
             switch (quest.questType)
             {
                 case QuestType.MainQuest:
                     if (currentMainQuest is { isComplete: false }) return;
+                    if (currentMainQuest is not null)
+                    {
+                        foreach (var objective in currentMainQuest.objectives)
+                        {
+                            Destroy(objective.ui.gameObject);
+                        }    
+                    }
                     currentMainQuest = quest;
                     GameManager.Instance.GameEvents.AddObjective(quest.objectives, true);
                     break;
@@ -91,6 +84,36 @@ namespace Objectives
                 default:
                     break;
             }
+        }
+
+        private static void GameEventOnUpdateQuest(ObjectiveScriptable quest, int objectiveIndex, int objectiveValue)
+        {
+            if (objectiveIndex < 0 || objectiveIndex >= quest.objectives.Length) return;
+            
+            var questObjective = quest.objectives[objectiveIndex];
+            if (questObjective.isCompleted) return;
+            
+            questObjective.currentValue += objectiveValue;
+            
+            // Check if the objectives has completed or not
+            if (questObjective.currentValue >= questObjective.targetComplete)
+            {
+                questObjective.isCompleted = true;
+                questObjective.ui.ShowCheckmark(true);
+            }
+            
+            questObjective.OnValueChange?.Invoke();
+            questObjective.ui.ObjectiveText(string.Format(questObjective.objectiveDisplayName, questObjective.currentValue, questObjective.targetComplete));
+            
+            CheckQuestCompleted(quest);
+        }
+
+        private static void CheckQuestCompleted(ObjectiveScriptable quest)
+        {
+            int completion = quest.objectives.Count(objective => objective.isCompleted);
+            if (quest.objectives.Length != completion) return;
+            quest.OnCompleteTrigger.Invoke();
+            quest.isComplete = true;
         }
 
         #endregion

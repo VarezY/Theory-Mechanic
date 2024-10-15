@@ -55,17 +55,13 @@ namespace Managers
 
         #endregion
 
-        public event Action<Quest> onAddQuest;
-        public virtual void AddQuest(Quest quest)
+        #region Quest Events
+
+        public event Action<ObjectiveScriptable> onAddQuest;
+        public virtual void AddQuest(ObjectiveScriptable quest)
         {
             onAddQuest?.Invoke(quest);
         }
-        
-        public event Action<Quest, List<Quest>> onUpdateQuest;
-        public virtual void UpdateQuest(Quest mainQuest, List<Quest> sideQuests)
-        {
-            onUpdateQuest?.Invoke(mainQuest, sideQuests);
-        }        
         
         public event Action<Objective[], bool> onAddObjective;
         public virtual void AddObjective(Objective[] objective, bool isMainQuest)
@@ -73,11 +69,15 @@ namespace Managers
             onAddObjective?.Invoke(objective, isMainQuest);
         }
         
-        public event Action<Objective, int> onUpdateObjective;
-        public virtual void UpdateObjective(Objective objective, int value)
+        public event Action<ObjectiveScriptable, int, int> onUpdateObjective;
+        public virtual void UpdateObjective(ObjectiveScriptable quest, int objective, int value)
         {
-            onUpdateObjective?.Invoke(objective, value);
+            onUpdateObjective?.Invoke(quest, objective, value);
         }
+        
+        // public event Action<> 
+
+        #endregion
 
         
     }

@@ -49,8 +49,7 @@ namespace UI
 
         private void Start()
         {
-            GameManager.Instance.GameEvents.onUpdateQuest += GameEventsOnonUpdateQuest;
-            GameManager.Instance.GameEvents.onAddObjective += GameEventsOnonAddObjective;
+            GameManager.Instance.GameEvents.onAddObjective += GameEventsOnAddObjective;
             
             // UI
             GameManager.Instance.GameEvents.onUpdateTimeUI += GameEventsOnUpdateTimeUI;
@@ -65,8 +64,7 @@ namespace UI
         
         private void OnDisable()
         {
-            GameManager.Instance.GameEvents.onUpdateQuest -= GameEventsOnonUpdateQuest;
-            GameManager.Instance.GameEvents.onAddObjective -= GameEventsOnonAddObjective;
+            GameManager.Instance.GameEvents.onAddObjective -= GameEventsOnAddObjective;
 
             // UI
             GameManager.Instance.GameEvents.onUpdateTimeUI -= GameEventsOnUpdateTimeUI;
@@ -209,38 +207,7 @@ namespace UI
             boredomSlider.value = percentage;
         }
         
-        private void GameEventsOnonUpdateQuest(Quest mainQuest, List<Quest> sideQuest)
-        {
-            if (mainQuest == null) return;
-
-            GenerateQuest(mainQuest, true);
-            
-            if (sideQuest.IsNullOrEmpty()) return;
-
-            sideQuestPanel.SetActive(true);
-
-            foreach (var quest in sideQuest)
-            {
-                GenerateQuest(quest, false);
-            }
-        }
-
-        private void GenerateQuest(Quest quest, bool isMainQuest)
-        {
-            foreach (var objectives in quest.objectives)
-            {
-                var temp = Instantiate(questPanel, questRootLocation);
-                if (isMainQuest) temp.transform.SetSiblingIndex(mainQuestPanel.transform.GetSiblingIndex() + 1);
-                temp.name = $"{objectives.objectiveDisplayName}";
-                
-                var objectiveUI = temp.GetComponent<ObjectiveUI>();
-                objectiveUI.NewObjective();
-                objectiveUI.ObjectiveText(objectives.objectiveDisplayName);
-                objectiveUI.BlinkAnimation();
-            }
-        }
-        
-        private void GameEventsOnonAddObjective(Objective[] questObjectives, bool isMainQuest)
+        private void GameEventsOnAddObjective(Objective[] questObjectives, bool isMainQuest)
         {
             foreach (var objective in questObjectives)
             {
@@ -249,13 +216,15 @@ namespace UI
                 if (isMainQuest) temp.transform.SetSiblingIndex(mainQuestPanel.transform.GetSiblingIndex() + 1);
                 else sideQuestPanel.SetActive(true);
                 
-                temp.name = $"{objective.objectiveDisplayName}";
+                temp.name = string.Format(objective.objectiveDisplayName, objective.currentValue, objective.targetComplete);
                 
                 var objectiveUI = temp.GetComponent<ObjectiveUI>();
                 objectiveUI.NewObjective();
-                objectiveUI.ObjectiveText(objective.objectiveDisplayName);
                 objectiveUI.BlinkAnimation();
-            } 
+                objectiveUI.ObjectiveText(temp.name);
+                objectiveUI.ShowCheckmark(objective.isCompleted);
+                objective.ui = objectiveUI;
+            }
         }
 
         #endregion

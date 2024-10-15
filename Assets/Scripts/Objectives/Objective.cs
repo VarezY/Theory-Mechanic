@@ -12,24 +12,9 @@ namespace Objectives
         public int currentValue;
 
         public Action OnValueChange;
-        
+        [ReadOnly] public ObjectiveUI ui;
+
         [ReadOnly] public bool isCompleted;
-    }
-
-    [Serializable]
-    public class Quest
-    {
-        public string questName;
-        
-        public Objective[] objectives;
-
-        public QuestType questType;
-
-        public Action OnBeforeTrigger;
-        public Action OnAfterTrigger;
-        public Action OnCompleteTrigger;
-        
-        [ReadOnly] public bool isComplete;
     }
 
     [Serializable]

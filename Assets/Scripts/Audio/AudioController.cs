@@ -6,8 +6,13 @@ namespace Audio
         #region Serialize Parameter
 
         [SerializeField] private AudioSource playerSource;
+        [Header("Interact")]
         [SerializeField] private AudioClip changeButton;
         [SerializeField] private AudioClip interactButton;
+
+        [Header("Objective")]
+        [SerializeField] private AudioClip objectiveNew;
+        [SerializeField] private AudioClip objectiveCompleted;
         
         #endregion
 
@@ -47,6 +52,16 @@ namespace Audio
         public void PlayAudioInteract()
         {
             playerSource.PlayOneShot(interactButton);
+        }
+
+        public void PlayAudioNewObjective()
+        {
+            playerSource.PlayOneShot(objectiveNew);
+        }
+
+        public void PlayAudioCompleteObjective()
+        {
+            playerSource.PlayOneShot(objectiveCompleted);
         }
 
         #endregion

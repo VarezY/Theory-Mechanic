@@ -84,6 +84,7 @@ namespace Objectives
                 default:
                     break;
             }
+            GameManager.Instance.AudioController.PlayAudioNewObjective();
         }
 
         private static void GameEventOnUpdateQuest(ObjectiveScriptable quest, int objectiveIndex, int objectiveValue)
@@ -114,6 +115,18 @@ namespace Objectives
             if (quest.objectives.Length != completion) return;
             quest.OnCompleteTrigger.Invoke();
             quest.isComplete = true;
+            
+            GameManager.Instance.AudioController.PlayAudioCompleteObjective();
+            
+            foreach (var objective in quest.objectives)
+            {
+                objective.ui.ObjectiveCompleated();
+                objective.ui.BlinkAnimation();
+                if (quest.questType == QuestType.SideQuest)
+                {
+                    Destroy(objective.ui.gameObject, 15f);
+                }
+            }
         }
 
         #endregion

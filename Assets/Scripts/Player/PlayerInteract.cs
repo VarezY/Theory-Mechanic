@@ -72,7 +72,6 @@ namespace Player
                 var itemController = hitData.transform.GetComponent<ItemController>();
                 _manager.UIController.GenerateButtonPrompt(itemController);
                 _hasItem = true;
-
             }
             else
             {

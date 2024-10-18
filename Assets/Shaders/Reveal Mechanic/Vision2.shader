@@ -97,57 +97,6 @@ Shader "PostEffect/Vision2"
         }
         ENDHLSL
 
-        // First Pass: Back faces
-        /*Pass
-        {
-            Name "BackFace"
-            Tags {"LightMode"="UniversalForward"}
-            
-            Blend One OneMinusSrcAlpha
-            Cull Front
-
-            HLSLPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
-            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-            #pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
-            #pragma multi_compile _ _SHADOWS_SOFT
-            #pragma multi_compile_fragment _ _LIGHT_LAYERS
-
-            Varyings vert(Attributes IN)
-            {
-                Varyings OUT;
-                UNITY_SETUP_INSTANCE_ID(IN);
-                UNITY_TRANSFER_INSTANCE_ID(IN, OUT);
-                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
-
-                VertexPositionInputs positionInputs = GetVertexPositionInputs(IN.positionOS.xyz);
-                OUT.positionCS = positionInputs.positionCS;
-                OUT.positionWS = positionInputs.positionWS;
-                OUT.normalWS = TransformObjectToWorldNormal(IN.normalOS);
-                OUT.uv = TRANSFORM_TEX(IN.uv, _MainTex);
-                return OUT;
-            }
-
-            half4 frag(Varyings IN) : SV_Target
-            {
-                UNITY_SETUP_INSTANCE_ID(IN);
-                UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
-
-                float4 texColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv) * _Color;
-                float3 normalWS = normalize(-IN.normalWS); // Flip normal for back faces
-
-                float3 lighting = CalculateLighting(normalWS, IN.positionWS, _RenderingLayer);
-                float revealFactor = CalculateRevealFactor(normalWS, IN.positionWS, _RenderingLayer);
-
-                half3 color = texColor.rgb * lighting;
-                return half4(color, texColor.a * revealFactor);
-            }
-            ENDHLSL
-        }*/
-
         // Second Pass: Front faces
         Pass
         {

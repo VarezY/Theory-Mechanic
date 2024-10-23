@@ -368,8 +368,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150340458}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.23681802, y: 0.07723315, z: -0.018889077, w: 0.96829516}
-  m_LocalPosition: {x: -0.66533005, y: 5.5098424, z: -3.4068046}
+  m_LocalRotation: {x: 0.19326343, y: -0.29415792, z: 0.060865115, w: 0.934032}
+  m_LocalPosition: {x: 4.1248703, y: 5.5098424, z: -3.4003282}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2230,7 +2230,6 @@ GameObject:
   - component: {fileID: 828389894}
   - component: {fileID: 828389897}
   - component: {fileID: 828389898}
-  - component: {fileID: 828389899}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -2292,34 +2291,6 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
---- !u!114 &828389899
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 828389893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 418e42c7d0405cc48a7b83f63ea53bb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Path: {fileID: 1477111069}
-  m_PathPosition: 12.57
-  m_PositionUnits: 0
-  m_PathOffset: {x: 0, y: 0, z: 0}
-  m_XDamping: 0
-  m_YDamping: 0
-  m_ZDamping: 1
-  m_CameraUp: 0
-  m_PitchDamping: 0
-  m_YawDamping: 0
-  m_RollDamping: 0
-  m_AutoDolly:
-    m_Enabled: 0
-    m_PositionOffset: 0
-    m_SearchRadius: 2
-    m_SearchResolution: 5
 --- !u!114 &845958496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2418,14 +2389,14 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
+  m_Color: {r: 0.11320752, g: 0.11320752, b: 0.11320752, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -2477,13 +2448,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921604179}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: -0.08223863, y: -0.99221706, z: -0.082746655, w: -0.043533016}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: -9.035, y: -185.811, z: 9.936}
 --- !u!114 &939173420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2862,6 +2833,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1247781223}
   - component: {fileID: 1247781222}
+  - component: {fileID: 1247781224}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -2916,14 +2888,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247781221}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.236818, y: 0.07723315, z: -0.018889077, w: 0.96829516}
-  m_LocalPosition: {x: -1.852, y: 5.247, z: -3.321}
+  m_LocalRotation: {x: 0.19326343, y: -0.29415792, z: 0.060865115, w: 0.934032}
+  m_LocalPosition: {x: 4.1248703, y: 5.5098424, z: -3.4003282}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 828389894}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 29.266, y: 51.408, z: 29.416}
+--- !u!114 &1247781224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247781221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99a9c787e5d1bbf48a389834c4a9641c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Path: {fileID: 1477111069}
+  m_UpdateMethod: 2
+  m_PositionUnits: 1
+  m_Speed: 0.5
+  m_Position: 0
 --- !u!114 &1250447571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3053,8 +3042,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeProfile: {fileID: 11400000, guid: 4381460b42737234995154b387e9af83, type: 2}
   isEnabled: 1
-  patternIndex: 0
-  ditherThreshold: 1
+  patternIndex: 3
+  ditherThreshold: 3.5
   ditherStrength: 1
   ditherScale: 2
 --- !u!114 &1275719296
